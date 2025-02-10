@@ -62,7 +62,8 @@ public class Safari {
         driver.findElement(By.xpath("//nav//span[contains(text(), 'Stores')]")).click();
         driver.findElement(By.xpath("//div[@id='74191798529']//form/button[contains(text(), 'Log in')]")).click();
 
-        driver.findElement(By.xpath("sdafdsafdsafdsa"));
+        driver.findElement(By.xpath("//div[contains(text(), 'Cloathing asa')]")).click();
+        driver.findElement(By.xpath("//span//a[@class='Polaris-Navigation__Item']//span[contains(text(), 'Pumper Bundles')]")).click();
 
         //driver.quit();
     }
