@@ -45,8 +45,7 @@ public class Safari {
             e.printStackTrace();
         }
 
-        WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait1.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'Log in')]")));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'Log in')]")));
         driver.findElement(By.xpath("//span[contains(text(),'Log in')]")).click();
 
 
@@ -62,8 +61,15 @@ public class Safari {
         driver.findElement(By.xpath("//nav//span[contains(text(), 'Stores')]")).click();
         driver.findElement(By.xpath("//div[@id='74191798529']//form/button[contains(text(), 'Log in')]")).click();
 
+        //Tab switch
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(text(), 'Cloathing asa')]")));
         driver.findElement(By.xpath("//div[contains(text(), 'Cloathing asa')]")).click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span//a[@class='Polaris-Navigation__Item']//span[contains(text(), 'Pumper Bundles')]")));
         driver.findElement(By.xpath("//span//a[@class='Polaris-Navigation__Item']//span[contains(text(), 'Pumper Bundles')]")).click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@type='button']//span[contains(text(), 'Create offer')]")));
+        driver.findElement(By.xpath("//button[@type='button']//span[contains(text(), 'Create offer')]")).click();
 
         //driver.quit();
     }
