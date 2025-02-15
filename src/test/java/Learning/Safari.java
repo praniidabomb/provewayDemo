@@ -1,17 +1,17 @@
 package Learning;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
+import java.util.*;
 
 public class Safari {
 
-    public static void main(String args[]){
+    public static void main(String args[]) throws InterruptedException {
 
         WebDriver driver = new ChromeDriver();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
@@ -21,11 +21,11 @@ public class Safari {
         System.out.println("Inside Step - user is on login page");
         //System.out.println("Inside Step - user is on login page");
 
-
+        driver.get("https://partners.shopify.com/organizations");
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
         driver.manage().window().maximize();
-        driver.navigate().to("https://partners.shopify.com/organizations");
+
 
         driver.findElement(By.xpath("//input[@id='account_email']")).sendKeys("theboxx420@yahoo.com");
         //System.out.println(driver.getPageSource());
@@ -62,15 +62,39 @@ public class Safari {
         driver.findElement(By.xpath("//div[@id='74191798529']//form/button[contains(text(), 'Log in')]")).click();
 
         //Tab switch
+
+        // Get all window handles
+        Set<String> windowHandles = driver.getWindowHandles();
+        List<String> tabs = new ArrayList<>(windowHandles);
+        driver.switchTo().window(tabs.get(1));
+        try {
+            Thread.sleep(5000);  // Adjust as needed
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(text(), 'Cloathing asa')]")));
         driver.findElement(By.xpath("//div[contains(text(), 'Cloathing asa')]")).click();
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span//a[@class='Polaris-Navigation__Item']//span[contains(text(), 'Pumper Bundles')]")));
         driver.findElement(By.xpath("//span//a[@class='Polaris-Navigation__Item']//span[contains(text(), 'Pumper Bundles')]")).click();
 
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@type='button']//span[contains(text(), 'Create offer')]")));
-        driver.findElement(By.xpath("//button[@type='button']//span[contains(text(), 'Create offer')]")).click();
+        //Original Solution
+        //wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[2]/div[2]/div[3]/div[2]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[5]/div[1]/span[2]/div[1]/*[name()='svg'][1]")));
+        //WebElement clone = driver.findElement(By.xpath("//td/div[@class = 'actions']//div[@class = 'clone-btn']"));
 
-        //driver.quit();
+
+        driver.switchTo().frame("app-iframe");
+        try {
+            Thread.sleep(3000);  // Adjust as needed
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        driver.findElement(By.xpath("//td/div[@class = 'actions']//div[@class = 'clone-btn']")).click();
+        Thread.sleep(10000);
+        driver.findElement(By.xpath("//td/div[@class = 'actions']//div[@class = 'delete-btn']")).click();
+
+
+        //wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//:r2s:
     }
 }
